@@ -1,0 +1,12 @@
+# Heaps Practice
+
+Congratulations! You're submitting your assignment!
+
+## Comprehension Questions
+
+Question | Answer
+:------------- | :-------------
+How is a Heap different from a Binary Search Tree? | 
+Could you build a heap with linked nodes? | 
+Why is adding a node to a heap an O(log n) operation?
+
