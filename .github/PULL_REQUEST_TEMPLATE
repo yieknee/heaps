@@ -8,5 +8,7 @@ Question | Answer
 :------------- | :-------------
 How is a Heap different from a Binary Search Tree? | 
 Could you build a heap with linked nodes? | 
-Why is adding a node to a heap an O(log n) operation?
+Why is adding a node to a heap an O(log n) operation? |
+Were the `heap_up` & `heap_down` methods useful?  Why? |
+
 
