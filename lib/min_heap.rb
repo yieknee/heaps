@@ -14,10 +14,18 @@ class MinHeap
   end
 
   # This method adds a HeapNode instance to the heap
-  # Time Complexity: ?
-  # Space Complexity: ?
+  # Time Complexity: 0(1)?
+  # Space Complexity: o(n)?
   def add(key, value = key)
-    raise NotImplementedError, "Method not implemented yet..."
+    node = HeapNode.new(key, value)
+    if @store.empty?
+      @store << node
+    else
+      @store << node
+      current_index = @store.length - 1
+      @store = heap_up(current_index)
+    end
+
   end
 
   # This method removes and returns an element from the heap
@@ -25,9 +33,13 @@ class MinHeap
   # Time Complexity: ?
   # Space Complexity: ?
   def remove()
-    raise NotImplementedError, "Method not implemented yet..."
+    removed = @store[0].value
+    @store[0] = @store[@store.length - 1]
+    parent_node = @store[0]
+    @store.pop
+    @store = heap_down(0)
+    return removed
   end
-
 
   # Used for Testing
   def to_s
@@ -47,7 +59,7 @@ class MinHeap
   # Time complexity: ?
   # Space complexity: ?
   def empty?
-    raise NotImplementedError, "Method not implemented yet..."
+    return @store.empty?
   end
 
   private
@@ -58,14 +70,56 @@ class MinHeap
   # Time complexity: ?
   # Space complexity: ?
   def heap_up(index)
+    node = @store[index]
+    parent_index = (index - 1)/2
+    parent_node = @store[parent_index]
+    return @store if parent_node.key <= node.key || index == 0
+
+    @store[index] = parent_node
+    @store[parent_index] = node
     
+    index = parent_index
+    return heap_up(index)
   end
 
   # This helper method takes an index and 
   #  moves it up the heap if it's smaller
   #  than it's parent node.
   def heap_down(index)
-    raise NotImplementedError, "Method not implemented yet..."
+    parent_node = @store[index]
+    left_child_index = index * 2 + 1
+    right_child_index = index * 2 + 2
+    left_child = @store[left_child_index] 
+    right_child = @store[right_child_index]
+    if left_child.nil? == false && right_child.nil? == false
+      return @store if (parent_node.key <= left_child.key && parent_node.key <= right_child.key)
+
+      if left_child.key < right_child.key
+        @store[index] = left_child
+        @store[left_child_index] = parent_node
+        index = left_child_index
+        return heap_down(index)
+      else
+        @store[index] = right_child
+        @store[right_child_index] = parent_node
+        index = right_child_index
+        return heap_down(index)
+      end
+    elsif left_child.nil? == true && right_child.nil? == true
+      return @store 
+    elsif left_child.nil? == true && right_child.nil? == false
+      return @store if parent_node.key <= right_child.key 
+      @store[index] = right_child
+      @store[right_child_index] = parent_node
+      index = right_child_index
+      return heap_down(index)
+    else left_child.nil? == false && right_child.nil? == true
+      return @store if parent_node.key <= left_child.key
+      @store[index] = left_child
+      @store[left_child_index] = parent_node
+      index = left_child_index
+      return heap_down(index)
+    end
   end
 
   # If you want a swap method... you're welcome

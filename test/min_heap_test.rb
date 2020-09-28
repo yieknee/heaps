@@ -47,7 +47,6 @@ describe "Heap" do
     output = heap.to_s
 
     # Assert
-
     expect(output).must_equal "[Donuts, Pizza, Pasta, Soup, Cookies, Cake]"
   end
 
